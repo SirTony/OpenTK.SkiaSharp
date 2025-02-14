@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>SirTony.OpenTK.SkiaSharp</Title>
+        <Authors>SirTony</Authors>
+        <Description>Integrates SkiaSharp and OpenTK allowing for the cross-platform creation of windows that can be drawn on with Skia. Manages Skia and OpenGL for you.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/SirTony/OpenTK.SkiaSharp</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageTags>opengl, opentk, skia, skiasharp</PackageTags>
+        <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="OpenTK" Version="4.9.3"/>
+        <PackageReference Include="SkiaSharp" Version="3.116.1"/>
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1"/>
+        <Content Include="../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+</Project>
