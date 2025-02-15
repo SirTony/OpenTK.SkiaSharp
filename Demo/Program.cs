@@ -1,7 +1,7 @@
-﻿using SirTony.OpenTK.SkiaSharp;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using SirTony.OpenTK.SkiaSharp;
 using SkiaSharp;
 using Topten.RichTextKit;
 
@@ -134,7 +134,7 @@ internal sealed class DemoWindow() : SKWindow(
     }
 
     /// <inheritdoc />
-    protected override void OnRenderFrame( FrameEventArgs args )
+    protected override void OnRenderFrame( FrameEventArgs args, SKCanvas canvas )
     {
         // rotate through the color spectrum
         var color = new SKColor(
@@ -142,10 +142,10 @@ internal sealed class DemoWindow() : SKWindow(
             (byte)( 0xFF * Math.Abs( Math.Sin( this._rotation + 2 * Math.PI / 3 ) ) ),
             (byte)( 0xFF * Math.Abs( Math.Sin( this._rotation + 4 * Math.PI / 3 ) ) )
         );
-        this.Canvas.Clear( color );
+        canvas.Clear( color );
 
         this._textBlock.Layout();
-        this._textBlock.Paint( this.Canvas, new( 10, 10 ), this._textPaint );
+        this._textBlock.Paint( canvas, new( 10, 10 ), this._textPaint );
 
         var center = new Vector2( this.ClientSize.X / 2f, this.ClientSize.Y / 2f );
 
@@ -171,7 +171,7 @@ internal sealed class DemoWindow() : SKWindow(
         path.LineTo( squareBottomLeft );
         path.Close();
 
-        this.Canvas.DrawPath( path, this._paint );
+        canvas.DrawPath( path, this._paint );
 
         // square vertices
         squareTopLeft     = new( center.X - r, center.Y - r );
@@ -193,7 +193,7 @@ internal sealed class DemoWindow() : SKWindow(
         path.Close();
 
         this._paint.Color = SKColors.Goldenrod;
-        this.Canvas.DrawPath( path, this._paint );
+        canvas.DrawPath( path, this._paint );
 
         var fps = 1f / this._samples.Where( x => x > Double.Epsilon ).Average();
         var str = $"Drawing at {Math.Ceiling( fps )} FPS!";
@@ -201,9 +201,9 @@ internal sealed class DemoWindow() : SKWindow(
         var pt = new SKPoint( center.X - bounds.Width / 2f, center.Y - bounds.Height / 2f );
 
         this._paint.Color = SKColors.White;
-        this.Canvas.DrawText( str, pt, this._font, this._paint );
+        canvas.DrawText( str, pt, this._font, this._paint );
 
-        base.OnRenderFrame( args );
+        base.OnRenderFrame( args, canvas );
 
         return;
 

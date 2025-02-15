@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SirTony.OpenTK.SkiaSharp\SirTony.OpenTK.SkiaSharp.csproj" />
+        <ProjectReference Include="..\SirTony.OpenTK.SkiaSharp\SirTony.OpenTK.SkiaSharp.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

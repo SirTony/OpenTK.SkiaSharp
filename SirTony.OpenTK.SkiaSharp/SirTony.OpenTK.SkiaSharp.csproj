@@ -13,13 +13,14 @@
         <RepositoryType>github</RepositoryType>
         <PackageTags>opengl, opentk, skia, skiasharp</PackageTags>
         <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+        <Version>1.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="OpenTK" Version="4.9.3"/>
         <PackageReference Include="SkiaSharp" Version="3.116.1"/>
         <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1"/>
-        <Content Include="../README.md" Pack="true" PackagePath="/" />
+        <Content Include="../README.md" Pack="true" PackagePath="/"/>
     </ItemGroup>
 
 </Project>

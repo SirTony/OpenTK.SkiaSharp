@@ -6,11 +6,13 @@ using SkiaSharp;
 namespace SirTony.OpenTK.SkiaSharp;
 
 /// <summary>
-/// Creates a new OpenGL-backed window for rendering with Skia.
-/// Skia may be accessed via <see cref="SKWindow.Canvas" />.
+///     Creates a new OpenGL-backed window for rendering with Skia.
 /// </summary>
 /// <param name="gameWindowSettings">The game window settings that will be passed onto the base <see cref="GameWindow" />.</param>
-/// <param name="nativeWindowSettings">The native window settings that will be passed onto the base <see cref="GameWindow" />.</param>
+/// <param name="nativeWindowSettings">
+///     The native window settings that will be passed onto the base
+///     <see cref="GameWindow" />.
+/// </param>
 // ReSharper disable once InconsistentNaming
 public class SKWindow(
     GameWindowSettings   gameWindowSettings,
@@ -23,10 +25,7 @@ public class SKWindow(
     private          SKSurface?             _surface;
     private          GRBackendRenderTarget? _target;
 
-    /// <summary>
-    /// The Skia canvas used for rendering.
-    /// </summary>
-    protected SKCanvas Canvas => this._surface!.Canvas;
+    private SKCanvas Canvas => this._surface!.Canvas;
 
     /// <inheritdoc />
     protected override void OnLoad()
@@ -44,12 +43,17 @@ public class SKWindow(
         base.OnResize( e );
     }
 
+    /// <inheritdoc cref="GameWindow.OnRenderFrame" />
+    /// <param name="canvas">The Skia canvas used for rendering.</param>
+    protected virtual void OnRenderFrame( FrameEventArgs e, SKCanvas canvas ) { }
+
     /// <inheritdoc />
-    protected override void OnRenderFrame( FrameEventArgs args )
+    protected sealed override void OnRenderFrame( FrameEventArgs e )
     {
+        this.OnRenderFrame( e, this.Canvas );
         this._surface?.Flush();
         this.SwapBuffers();
-        base.OnRenderFrame( args );
+        base.OnRenderFrame( e );
     }
 
     private void CreateSurface()
