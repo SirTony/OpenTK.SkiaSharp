@@ -1,11 +1,12 @@
 # OpenTK.SkiaSharp
 
-OpenTK + SkiaSharp integration.
+OpenGL + SkiaSharp integration for .NET
 
-# Minimal Example
+# Basic Example
 
 ```csharp
 using SirTony.OpenTK.SkiaSharp;
+using SkiaSharp;
 
 var gameWindowSettings = new GameWindowSettings();
 var nativeWindowSettings = new NativeWindowSettings
@@ -15,6 +16,22 @@ var nativeWindowSettings = new NativeWindowSettings
     Vsync = VSyncMode.On,
 };
 
-using var window = new SKWindow( gameWindowSettings, nativeWindowSettings );
+using var window = new MyWindow( gameWindowSettings, nativeWindowSettings );
 window.Run();
+
+internal sealed class MyWindow : SKWindow
+{
+    public MyWindow
+        : base( gameWindowSettings, nativeWindowSettings )
+    { }
+
+    protected override void OnRenderFrame( FrameEventArgs e, SKCanvas canvas )
+    {
+        canvas.Clear( SKColors.CornflowerBlue );
+        
+        // Draw something here
+        
+        base.OnRenderFrame( e, canvas );
+    }
+}
 ```
