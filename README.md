@@ -21,7 +21,7 @@ window.Run();
 
 internal sealed class MyWindow : SKWindow
 {
-    public MyWindow
+    public MyWindow( GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings )
         : base( gameWindowSettings, nativeWindowSettings )
     { }
 
