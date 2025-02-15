@@ -8,6 +8,7 @@ OpenGL + SkiaSharp integration for .NET
 using SirTony.OpenTK.SkiaSharp;
 using SkiaSharp;
 
+// set up OpenTK settings
 var gameWindowSettings = new GameWindowSettings();
 var nativeWindowSettings = new NativeWindowSettings
 {
@@ -16,9 +17,21 @@ var nativeWindowSettings = new NativeWindowSettings
     Vsync = VSyncMode.On,
 };
 
+// create the window
 using var window = new MyWindow( gameWindowSettings, nativeWindowSettings );
+
+// you can use the render event instead inheriting the class
+window.RenderFrame += ( e, canvas ) =>
+{
+    // canvas.Clear( SKColors.CornflowerBlue );
+    
+    // Draw something here
+};
+
+// run the main event loop
 window.Run();
 
+// we can inherit SKWindow and override the OnRenderFrame method to draw on the canvas
 internal sealed class MyWindow : SKWindow
 {
     public MyWindow( GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings )

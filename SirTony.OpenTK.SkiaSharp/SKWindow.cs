@@ -27,6 +27,8 @@ public class SKWindow(
 
     private SKCanvas Canvas => this._surface!.Canvas;
 
+    new public event Action<FrameEventArgs, SKCanvas>? RenderFrame;
+
     /// <inheritdoc />
     protected override void OnLoad()
     {
@@ -45,7 +47,7 @@ public class SKWindow(
 
     /// <inheritdoc cref="GameWindow.OnRenderFrame" />
     /// <param name="canvas">The Skia canvas used for rendering.</param>
-    protected virtual void OnRenderFrame( FrameEventArgs e, SKCanvas canvas ) { }
+    protected virtual void OnRenderFrame( FrameEventArgs e, SKCanvas canvas ) => this.RenderFrame?.Invoke( e, canvas );
 
     /// <inheritdoc />
     protected sealed override void OnRenderFrame( FrameEventArgs e )
